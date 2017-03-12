@@ -4,13 +4,12 @@ import org.powerbot.script.Condition;
 import org.powerbot.script.rt4.ClientContext;
 import org.powerbot.script.rt4.GameObject;
 
-
-public class Chop extends Task<ClientContext>{
+public class WalkingToTree extends Task<ClientContext>{
     private int[] treeIds = {1276, 1278, 1271};
     //test if the axe ids are working
     private int[] axeIds = {1351, 1349, 1353, 1355, 1357, 1359};
 
-    public Chop(ClientContext ctx){
+    public WalkingToTree(ClientContext ctx) {
         super(ctx);
     }
 
@@ -26,13 +25,13 @@ public class Chop extends Task<ClientContext>{
     @Override
     public void execute(){
         if(ctx.players.local().animation() == -1){
-            System.out.println("Chopping down tree");
+            System.out.println("Walking towards tree");
 
             GameObject tree = ctx.objects.nearest().poll();
 
-            if (tree.inViewport()){
-                tree.interact("Chop");
-                Condition.sleep(2000);
+            if (!tree.inViewport()){
+                ctx.movement.step(tree);
+                ctx.camera.turnTo(tree);
             }
         }
     }

@@ -15,7 +15,7 @@ public class ArvenzisCutting extends PollingScript<ClientContext> {
     private List<Task> taskList = new ArrayList<Task>();
 
     public void start() {
-       taskList.addAll(Arrays.asList(new Chop(ctx)));
+       taskList.addAll(Arrays.asList(new WalkingToTree(ctx), new Chop(ctx)));
     }
 
     public void poll() {
