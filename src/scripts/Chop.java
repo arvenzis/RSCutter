@@ -25,6 +25,7 @@ public class Chop extends Task<ClientContext>{
 
     @Override
     public void execute(){
+        System.out.println(ctx.players.local().animation());
         if(ctx.players.local().animation() == -1){
             System.out.println("Chopping down tree");
 
